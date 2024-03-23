@@ -1,77 +1,88 @@
-const textarea = document.querySelector("#textarea")
-const btnGravar = document.querySelector("#btnGravar")
-const btnParar = document.querySelector("#btnParar")
-const btnBaixar = document.querySelector("#btnBaixar")
-const btnLimpar = document.querySelector("#btnLimpar")
+class SpeechToText {
+  constructor(textarea) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    this.recognition = new SpeechRecognition();
+    this.textarea = textarea;
+    this.recognition.continuous = true;
+    this.recognition.lang = "pt-BR";
+    this.setupRecognition();
+  }
 
-class speechApi {
-
-  constructor() {
-
-    const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition
-
-    this.speechApi = new SpeechToText()
-    this.output = textarea.output 
-    this.speechApi.continuous = true
-    this.speechApi.lang = "pt-BR"
-    
-    this.speechApi.onresult = (e) => {
-      var resultIndex = e.resultIndex
-      var transcript = e.results[resultIndex][0].transcript
-
-      textarea.value += transcript
-    }
+  setupRecognition() {
+    this.recognition.onresult = (e) => {
+      const resultIndex = e.resultIndex;
+      const transcript = e.results[resultIndex][0].transcript;
+      this.textarea.value += transcript;
+    };
   }
 
   start() {
-    this.speechApi.start()
+    this.recognition.start();
   }
 
   stop() {
-    this.speechApi.stop()
+    this.recognition.stop();
   }
 }
 
-  var speech = new speechApi()
-
-  btnGravar.addEventListener("click", e => {
-    btnGravar.disabled = true
-    btnParar.disabled = false
-    speech.start()
-  })
-
-  btnParar.addEventListener("click", () => {
-    btnGravar.disabled = false
-    btnParar.disabled = true
-    speech.stop()
-  })
-
-  btnBaixar.addEventListener('click', () => {
-    var text = textarea.value
-    var filename = "speech.txt"
-
-    download(text, filename)
-  })
-
-  function download(text, filename) {
-    var element = document.createElement('a')
-
-    element.setAttribute('href', 'data:text/plaincharset=utf-8,' + encodeURIComponent(text))
-
-    element.setAttribute('download', filename)
-
-    element.style.display = 'none'
-
-    document.body.appendChild(element)
-
-    element.click()
-
-    document.body.removeChild(element)
+class SpeechController {
+  constructor(textarea, btnRecord, btnStop, btnDownload, btnTrash) {
+    this.textarea = textarea;
+    this.btnRecord = btnRecord;
+    this.btnStop = btnStop;
+    this.btnDownload = btnDownload;
+    this.btnTrash = btnTrash;
+    this.speech = new SpeechToText(textarea);
+    this.setupListeners();
   }
 
-  btnLimpar.addEventListener("click", () => {
-    textarea.value = ""
-    btnGravar.disabled = false
-    btnParar.disabled = true
-    speech.stop()
-  })
+  setupListeners() {
+    this.btnRecord.addEventListener("click", () => this.startRecording());
+    this.btnStop.addEventListener("click", () => this.stopRecording());
+    this.btnDownload.addEventListener("click", () => this.downloadText());
+    this.btnTrash.addEventListener("click", () => this.clearTextarea());
+  }
+
+  startRecording() {
+    this.btnRecord.disabled = true;
+    this.btnStop.disabled = false;
+    this.speech.start();
+  }
+
+  stopRecording() {
+    this.btnRecord.disabled = false;
+    this.btnStop.disabled = true;
+    this.speech.stop();
+  }
+
+  downloadText() {
+    const text = this.textarea.value;
+    const filename = "speech.txt";
+    this.download(text, filename);
+  }
+
+  download(text, filename) {
+    const element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+    element.setAttribute("download", filename);
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
+  clearTextarea() {
+    this.textarea.value = "";
+    this.btnRecord.disabled = false;
+    this.btnStop.disabled = true;
+    this.speech.stop();
+  }
+}
+
+const textarea = document.querySelector("#textarea");
+const btnRecord = document.querySelector("#btnRecord");
+const btnStop = document.querySelector("#btnStop");
+const btnDownload = document.querySelector("#btnDownload");
+const btnTrash = document.querySelector("#btnTrash");
+
+new SpeechController(textarea, btnRecord, btnStop, btnDownload, btnTrash);

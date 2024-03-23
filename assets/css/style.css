@@ -1,38 +1,101 @@
+/* fonts.css */
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;400;500;600;700;800;900&family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* selection.css */
+::selection {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* scrollbar.css */
+textarea::-webkit-scrollbar {
+    width: 12px;
+    background-color: #f5f5f5;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #a9a9a9;
+}
+
+/* typography.css */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-  }
+}
 
-  ::selection{
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  
-  textarea::-webkit-scrollbar {
-    width: 12px;
-    background-color: #f5f5f5; 
-  }
-  
-  textarea::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #a9a9a9; 
-  }
-
-  .img-micro{
-    width: 5%;
-    margin-bottom: 1rem;
-  }
-  
-  p {
+p {
     color: #ffffff;
-    font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 0.3rem;
     font-size: 3rem;
-  }
-  
-  .speech{
+}
+
+.title{
+  font-size: 32px;
+  font-family: 'Bebas Neue' sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media(max-width: 700px) {
+    p {
+        font-size: 2rem;
+    }
+}
+
+/* components.css */
+.img-micro {
+    width: 5%;
+    margin-bottom: 1rem;
+}
+
+.fas {
+    font-weight: 600;
+    font-size: 3rem;
+    color: #000000;
+    min-width: 4rem;
+}
+
+button {
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 25%;
+    box-shadow: 0px 10px #afaeae;
+    transition: .3s;
+    margin-bottom: 1.5rem;
+}
+
+button:hover {
+    transform: translateY(5px);
+    transition: .3s;
+    box-shadow: 0px 6px #a8a7a7;
+}
+
+button:disabled {
+    box-shadow: 0px 10px rgba(175, 174, 174, 0.3);
+}
+
+button:disabled:hover {
+    box-shadow: 0px 6px rgba(175, 174, 174, 0.3);
+}
+
+#btnTrash {
+    background-color: #bb0909;
+    box-shadow: 0px 10px #880707;
+}
+
+#btnTrash:hover {
+    box-shadow: 0px 6px #880707;
+}
+
+.fa-trash-alt {
+    color: #ffffff;
+}
+
+/* layout.css */
+.speech {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -40,9 +103,9 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(-35deg, #56ccf2, #2f80ed);
-    }
-  
-  #textarea {
+}
+
+#textarea {
     width: 80%;
     height: 40%;
     margin: 50px auto;
@@ -51,59 +114,5 @@
     outline: 0;
     text-align: justify;
     border-radius: 0.4rem;
-    box-shadow: 0px 4px 10px 8px rgba(0, 0, 0, 15%);
-  }
-  
-  .fas {
-    font-weight: 600;
-    font-size: 3rem;
-    color: #000000;
-    min-width: 4rem;
-  }
-  
-  button{ 
-    padding: 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 25%;
-    box-shadow: 0px 10px #afaeae;
-    transition: .3s;
-    margin-bottom: 1.5rem;
-  }
-
-  button:hover{
-    transform: translateY(5px);
-    transition: .3s;
-    box-shadow: 0px 6px #a8a7a7;
-  }
-
-  button:disabled{
-    box-shadow: 0px 10px rgba(175, 174, 174, 0.3);
-  }
-
-  button:disabled:hover{
-    box-shadow: 0px 6px rgba(175, 174, 174, 0.3);
-  }
-
-  #btnLimpar{
-    background-color: #bb0909;
-    box-shadow: 0px 10px #880707;
-  }
-
-  #btnLimpar:hover{
-    box-shadow: 0px 6px #880707;
-  }
-  
-  .fa-trash-alt{
-    color: #ffffff;
-  }
-  
-  @media(max-width: 700px) {
-    p {
-      font-size: 2rem;
-    }
-    
-    .fas {
-      min-width: 3rem;
-    }
-  }
+    box-shadow: 0px 4px 10px 8px rgba(0, 0, 0, 0.45%);
+}
