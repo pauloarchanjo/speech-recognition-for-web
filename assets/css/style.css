@@ -1,23 +1,24 @@
-/* fonts.css */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;400;500;600;700;800;900&family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* selection.css */
-::selection {
-    background-color: rgba(0, 0, 0, 0.3);
+/* Root Variables */
+:root {
+    --color-background: #313131;
+    --color-selection-bg: rgba(0, 0, 0, 0.3);
+    --color-scrollbar-bg: #f5f5f5;
+    --color-scrollbar-thumb: #a9a9a9;
+    --color-text: #ffffff;
+    --color-text-highlight: #000000;
+    --color-button-shadow: #afaeae;
+    --color-button-shadow-hover: #a8a7a7;
+    --color-button-disabled-shadow: rgba(175, 174, 174, 0.3);
+    --color-trash-bg: #bb0909;
+    --color-trash-shadow: #880707;
+    --color-gradient-start: #161616;
+    --color-gradient-end: #1b1b1b;
+    --color-trash-icon: #ffffff;
 }
 
-/* scrollbar.css */
-textarea::-webkit-scrollbar {
-    width: 12px;
-    background-color: #f5f5f5;
-}
-
-textarea::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #a9a9a9;
-}
-
-/* typography.css */
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -25,76 +26,94 @@ textarea::-webkit-scrollbar-thumb {
     font-family: 'Poppins', sans-serif;
 }
 
+::selection {
+    background-color: var(--color-selection-bg);
+}
+
+/* Scrollbar Styles */
+textarea::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--color-scrollbar-bg);
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--color-scrollbar-thumb);
+}
+
+/* Text Styles */
 p {
-    color: #ffffff;
-    letter-spacing: 0.3rem;
+    color: var(--color-text);
+    letter-spacing: 0.1rem;
     font-size: 3rem;
 }
 
-.title{
-  font-size: 32px;
-  font-family: 'Bebas Neue' sans-serif;
-  text-transform: uppercase;
-  font-weight: 600;
+.title {
+    font-size: 32px;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
+/* Responsive Adjustments */
 @media(max-width: 700px) {
     p {
         font-size: 2rem;
     }
 }
 
-/* components.css */
+/* Image Styles */
 .img-micro {
     width: 5%;
     margin-bottom: 1rem;
 }
 
+/* Font Awesome Icon Styles */
 .fas {
     font-weight: 600;
     font-size: 3rem;
-    color: #000000;
+    color: var(--color-text-highlight);
     min-width: 4rem;
 }
 
+/* Button Base Styles */
 button {
     padding: 1rem;
     border: none;
     cursor: pointer;
     border-radius: 25%;
-    box-shadow: 0px 10px #afaeae;
+    box-shadow: 0px 10px var(--color-button-shadow);
     transition: .3s;
     margin-bottom: 1.5rem;
 }
 
 button:hover {
     transform: translateY(5px);
-    transition: .3s;
-    box-shadow: 0px 6px #a8a7a7;
+    box-shadow: 0px 6px var(--color-button-shadow-hover);
 }
 
 button:disabled {
-    box-shadow: 0px 10px rgba(175, 174, 174, 0.3);
+    box-shadow: 0px 10px var(--color-button-disabled-shadow);
 }
 
 button:disabled:hover {
-    box-shadow: 0px 6px rgba(175, 174, 174, 0.3);
+    box-shadow: 0px 6px var(--color-button-disabled-shadow);
 }
 
-#btnTrash {
-    background-color: #bb0909;
-    box-shadow: 0px 10px #880707;
+/* Specific Button Styles */
+.button-trash {
+    background-color: var(--color-trash-bg);
+    box-shadow: 0px 10px var(--color-trash-shadow);
 }
 
-#btnTrash:hover {
-    box-shadow: 0px 6px #880707;
+.button-trash:hover {
+    box-shadow: 0px 6px var(--color-trash-shadow);
 }
 
-.fa-trash-alt {
-    color: #ffffff;
+.button-trash .fa-trash-alt {
+    color: var(--color-trash-icon);
 }
 
-/* layout.css */
+/* Layout Styles */
 .speech {
     width: 100vw;
     height: 100vh;
@@ -102,11 +121,12 @@ button:disabled:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(-35deg, #56ccf2, #2f80ed);
+    background: linear-gradient(-35deg, var(--color-gradient-start), var(--color-gradient-end));
 }
 
+/* Textarea Styles */
 #textarea {
-    width: 80%;
+    width: 50%;
     height: 40%;
     margin: 50px auto;
     padding: 1rem;
@@ -115,4 +135,5 @@ button:disabled:hover {
     text-align: justify;
     border-radius: 0.4rem;
     box-shadow: 0px 4px 10px 8px rgba(0, 0, 0, 0.45%);
+    background: var(--color-background);
 }
